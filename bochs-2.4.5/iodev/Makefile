@@ -19,7 +19,7 @@
 
 .SUFFIXES: .cc
 
-prefix          = /home/b/braden14/cis520/CIS520P1/usr/local--enable-gdb-stub--with-x
+prefix          = /home/b/braden14/cis520/CIS520P3/usr/local
 exec_prefix     = ${prefix}
 srcdir          = .
 

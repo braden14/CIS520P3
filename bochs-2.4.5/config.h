@@ -627,7 +627,7 @@ typedef
 
 #endif
 
-#define BX_GDBSTUB 0
+#define BX_GDBSTUB 1
 #define BX_DEBUGGER 0
 #define BX_DISASM 1
 #define BX_DEBUGGER_GUI 0

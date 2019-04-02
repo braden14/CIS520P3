@@ -15,7 +15,7 @@ static void do_format (void);
 /* Initializes the file system module.
    If FORMAT is true, reformats the file system. */
 void
-filesys_init (bool format)
+filesys_init (bool format) 
 {
   fs_device = block_get_role (BLOCK_FILESYS);
   if (fs_device == NULL)
@@ -24,7 +24,7 @@ filesys_init (bool format)
   inode_init ();
   free_map_init ();
 
-  if (format)
+  if (format) 
     do_format ();
 
   free_map_open ();
@@ -33,7 +33,7 @@ filesys_init (bool format)
 /* Shuts down the file system module, writing any unwritten data
    to disk. */
 void
-filesys_done (void)
+filesys_done (void) 
 {
   free_map_close ();
 }
@@ -43,23 +43,18 @@ filesys_done (void)
    Fails if a file named NAME already exists,
    or if internal memory allocation fails. */
 bool
-filesys_create (const char *name, off_t initial_size)
+filesys_create (const char *name, off_t initial_size) 
 {
-  //cprintf("Inside filesys_create\n");
   block_sector_t inode_sector = 0;
-  //cprintf("alpha\n");
   struct dir *dir = dir_open_root ();
-  //cprintf("betta\n");
   bool success = (dir != NULL
                   && free_map_allocate (1, &inode_sector)
                   && inode_create (inode_sector, initial_size)
                   && dir_add (dir, name, inode_sector));
-  //cprintf("gamma\n");
-  if (!success && inode_sector != 0)
+  if (!success && inode_sector != 0) 
     free_map_release (inode_sector, 1);
-  //cprintf("delta\n");
   dir_close (dir);
-  //cprintf("Exiting filesys_create with success = %d\n", success);
+
   return success;
 }
 
@@ -86,11 +81,11 @@ filesys_open (const char *name)
    Fails if no file named NAME exists,
    or if an internal memory allocation fails. */
 bool
-filesys_remove (const char *name)
+filesys_remove (const char *name) 
 {
   struct dir *dir = dir_open_root ();
   bool success = dir != NULL && dir_remove (dir, name);
-  dir_close (dir);
+  dir_close (dir); 
 
   return success;
 }

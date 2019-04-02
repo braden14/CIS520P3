@@ -7,7 +7,7 @@
 #
 ###################################################################
 
-prefix          = /home/b/braden14/cis520/CIS520P1/usr/local--enable-gdb-stub--with-x
+prefix          = /home/b/braden14/cis520/CIS520P3/usr/local
 srcdir          = .
 docdir          = $(prefix)/share/doc/bochs
 DOCBOOK2HTML = not_found

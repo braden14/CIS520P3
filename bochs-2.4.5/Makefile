@@ -19,7 +19,7 @@
 # the following rules:
 #   use $(VAR) not ${VAR}
 
-prefix          = /home/b/braden14/cis520/CIS520P1/usr/local--enable-gdb-stub--with-x
+prefix          = /home/b/braden14/cis520/CIS520P3/usr/local
 exec_prefix     = ${prefix}
 srcdir          = .
 
@@ -177,11 +177,11 @@ all: bochs  bximage bxcommit
 bochs: iodev/libiodev.a  \
            cpu/libcpu.a memory/libmemory.a gui/libgui.a \
            $(DISASM_LIB)  $(BX_OBJS) \
-           $(SIMX86_OBJS) $(FPU_LIB)  
+           $(SIMX86_OBJS) $(FPU_LIB) $(GDBSTUB_OBJS) 
 	$(LIBTOOL) --mode=link $(CXX) -o $@ $(CXXFLAGS) $(LDFLAGS) -export-dynamic $(BX_OBJS) $(SIMX86_OBJS) \
 		iodev/libiodev.a  cpu/libcpu.a memory/libmemory.a gui/libgui.a \
 		$(DISASM_LIB)   \
-		 $(FPU_LIB) \
+		$(GDBSTUB_OBJS) $(FPU_LIB) \
 		$(GUI_LINK_OPTS) \
 		$(MCH_LINK_FLAGS) \
 		$(SIMX86_LINK_FLAGS) \
@@ -195,19 +195,19 @@ bochs: iodev/libiodev.a  \
 .win32_dll_plugin_target: iodev/libiodev.a  \
            cpu/libcpu.a memory/libmemory.a gui/libgui.a \
            $(DISASM_LIB)  $(BX_OBJS) \
-           $(SIMX86_OBJS) $(FPU_LIB)  
+           $(SIMX86_OBJS) $(FPU_LIB) $(GDBSTUB_OBJS) 
 	$(DLLTOOL) --export-all-symbols --output-def bochs.def \
 		$(BX_OBJS) $(SIMX86_OBJS) \
 		iodev/libiodev.a cpu/libcpu.a memory/libmemory.a gui/libgui.a \
 		 $(DISASM_LIB)   \
-		 $(FPU_LIB)
+		$(GDBSTUB_OBJS) $(FPU_LIB)
 	$(DLLTOOL) --dllname bochs.exe --def bochs.def --output-lib dllexports.a
 	$(DLLTOOL) --dllname bochs.exe --output-exp bochs.exp --def bochs.def
 	$(CXX) -o bochs.exe $(CXXFLAGS) $(LDFLAGS) -export-dynamic \
 	    $(BX_OBJS) bochs.exp $(SIMX86_OBJS) \
 		iodev/libiodev.a cpu/libcpu.a memory/libmemory.a gui/libgui.a \
 		 $(DISASM_LIB)   \
-		 $(FPU_LIB) \
+		$(GDBSTUB_OBJS) $(FPU_LIB) \
 		$(GUI_LINK_OPTS) \
 		$(MCH_LINK_FLAGS) \
 		$(SIMX86_LINK_FLAGS) \

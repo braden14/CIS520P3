@@ -2,13 +2,10 @@
 #define THREADS_THREAD_H
 
 #include <debug.h>
+#include <hash.h>
 #include <list.h>
 #include <stdint.h>
-
-// added
-#include <kernel/list.h>
-#include <threads/synch.h>
-// added
+#include "threads/synch.h"
 
 /* States in a thread's life cycle. */
 enum thread_status
@@ -95,43 +92,47 @@ struct thread
     int priority;                       /* Priority. */
     struct list_elem allelem;           /* List element for all threads list. */
 
+    /* Owned by process.c. */
+    int exit_code;                      /* Exit code. */
+    struct wait_status *wait_status;    /* This process's completion status. */
+    struct list children;               /* Completion status of children. */
+
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
 
-    int64_t wakeup;
-    struct lock * wait_on_lock;
-    struct list donate_list;
-    struct list_elem donate_list_elem;
-    int initial_priority;
+    /* Alarm clock. */
+    int64_t wakeup_time;                /* Time to wake this thread up. */
+    struct list_elem timer_elem;        /* Element in timer_wait_list. */
+    struct semaphore timer_sema;        /* Semaphore. */
 
-    //additions for project 2
-    bool success;
-    struct semaphore child_lock;
-    struct list child_proc;
-    struct thread* parent;
-    int exit_code;
-    int waiting_tid;
-    struct file *user_prog;
-    struct list files;
-    int fd_count;
-    // end additions for proj 2
-
-#ifdef USERPROG
     /* Owned by userprog/process.c. */
     uint32_t *pagedir;                  /* Page directory. */
+    struct hash *pages;                 /* Page table. */
+    struct file *bin_file;              /* The binary executable. */
 
-#endif
+    /* Owned by syscall.c. */
+    struct list fds;                    /* List of file descriptors. */
+    struct list mappings;               /* Memory-mapped files. */
+    int next_handle;                    /* Next handle value. */
+    void *user_esp;                     /* User's stack pointer. */
 
     /* Owned by thread.c. */
     unsigned magic;                     /* Detects stack overflow. */
   };
 
-  struct child
+/* Tracks the completion of a process.
+   Reference held by both the parent, in its `children' list,
+   and by the child, in its `wait_status' pointer. */
+struct wait_status
   {
-    int tid;
-    struct list_elem elem;
-    int exit_code;
-    bool used;
+    struct list_elem elem;              /* `children' list element. */
+    struct lock lock;                   /* Protects ref_cnt. */
+    int ref_cnt;                        /* 2=child and parent both alive,
+                                           1=either child or parent alive,
+                                           0=child and parent both dead. */
+    tid_t tid;                          /* Child thread id. */
+    int exit_code;                      /* Child exit code, if dead. */
+    struct semaphore dead;              /* 1=child alive, 0=child dead. */
   };
 
 /* If false (default), use round-robin scheduler.
@@ -139,7 +140,6 @@ struct thread
    Controlled by kernel command-line option "-o mlfqs". */
 extern bool thread_mlfqs;
 
-bool sort_thread(const struct list_elem *, const struct list_elem *, void *);
 void thread_init (void);
 void thread_start (void);
 
@@ -171,9 +171,4 @@ void thread_set_nice (int);
 int thread_get_recent_cpu (void);
 int thread_get_load_avg (void);
 
-bool compare_priority (const struct list_elem *, const struct list_elem *, void * aux UNUSED);
-void remove_lock(struct lock *);
-void donate_priority(void);
-void update_priority (void);
-void test_yield(void);
 #endif /* threads/thread.h */
