@@ -19,7 +19,7 @@
 # the following rules:
 #   use $(VAR) not ${VAR}
 
-prefix          = /home/b/braden14/cis520/CIS520P3/usr/local
+prefix          = /home/n/nils/cis520/usr/local
 exec_prefix     = ${prefix}
 srcdir          = .
 

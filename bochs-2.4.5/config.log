@@ -27,10 +27,8 @@ uname -v = #48-Ubuntu SMP Tue Jan 29 16:28:13 UTC 2019
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
-PATH: /home/b/braden14/cis520/CIS520P3/pintos/src/utils
-PATH: /home/b/braden14/cis520/CIS520P3/usr/local/bin
-PATH: /home/b/braden14/cis520/CIS520P1/pintos/src/utils
-PATH: /home/b/braden14/cis520/CIS520P1/usr/local/bin
+PATH: /home/n/nils/cis520/CIS520P3/pintos/src/utils
+PATH: /home/n/nils/cis520/CIS520P3/usr/local/bin
 PATH: /usr/local/sbin
 PATH: /usr/local/bin
 PATH: /usr/sbin
@@ -418,8 +416,8 @@ configure:8401: checking whether stripping libraries is possible
 configure:8406: result: yes
 configure:8529: checking for shl_load
 configure:8585: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccjw7n1Y.o: In function `main':
-/home/b/braden14/cis520/CIS520P3/bochs-2.4.5/conftest.c:53: undefined reference to `shl_load'
+/tmp/cc8fNVl0.o: In function `main':
+/home/n/nils/cis520/CIS520P3/bochs-2.4.5/conftest.c:53: undefined reference to `shl_load'
 collect2: error: ld returned 1 exit status
 configure:8591: $? = 1
 configure: failed program was:
@@ -522,8 +520,8 @@ configure: failed program was:
 configure:8672: result: no
 configure:8677: checking for dlopen
 configure:8733: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccW9PdUb.o: In function `main':
-/home/b/braden14/cis520/CIS520P3/bochs-2.4.5/conftest.c:53: undefined reference to `dlopen'
+/tmp/ccMaX278.o: In function `main':
+/home/n/nils/cis520/CIS520P3/bochs-2.4.5/conftest.c:53: undefined reference to `dlopen'
 collect2: error: ld returned 1 exit status
 configure:8739: $? = 1
 configure: failed program was:
@@ -1617,8 +1615,8 @@ configure:26586: $? = 0
 configure:26604: result: yes
 configure:26621: checking for strrev
 configure:26677: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/cckMoZMk.o: In function `main':
-/home/b/braden14/cis520/CIS520P3/bochs-2.4.5/conftest.c:107: undefined reference to `strrev'
+/tmp/cciuodq7.o: In function `main':
+/home/n/nils/cis520/CIS520P3/bochs-2.4.5/conftest.c:107: undefined reference to `strrev'
 collect2: error: ld returned 1 exit status
 configure:26683: $? = 1
 configure: failed program was:
@@ -1735,8 +1733,8 @@ configure: failed program was:
 configure:26701: result: no
 configure:26718: checking for stricmp
 configure:26774: gcc -o conftest -g -O2   conftest.c  >&5
-/tmp/ccDwCd4t.o: In function `main':
-/home/b/braden14/cis520/CIS520P3/bochs-2.4.5/conftest.c:107: undefined reference to `stricmp'
+/tmp/ccRpbDhe.o: In function `main':
+/home/n/nils/cis520/CIS520P3/bochs-2.4.5/conftest.c:107: undefined reference to `stricmp'
 collect2: error: ld returned 1 exit status
 configure:26780: $? = 1
 configure: failed program was:
@@ -2134,8 +2132,8 @@ configure:28309: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  -
 conftest.c:120:6: warning: conflicting types for built-in function 'cos' [-Wbuiltin-declaration-mismatch]
  char cos ();
       ^~~
-/tmp/ccsXRXm8.o: In function `main':
-/home/b/braden14/cis520/CIS520P3/bochs-2.4.5/conftest.c:131: undefined reference to `cos'
+/tmp/cc5DVHUD.o: In function `main':
+/home/n/nils/cis520/CIS520P3/bochs-2.4.5/conftest.c:131: undefined reference to `cos'
 collect2: error: ld returned 1 exit status
 configure:28315: $? = 1
 configure: failed program was:
@@ -2279,8 +2277,8 @@ configure:28403: gcc -o conftest -g -O2 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES  -
 conftest.c:120:6: warning: conflicting types for built-in function 'floor' [-Wbuiltin-declaration-mismatch]
  char floor ();
       ^~~~~
-/tmp/ccXlC8Z3.o: In function `main':
-/home/b/braden14/cis520/CIS520P3/bochs-2.4.5/conftest.c:131: undefined reference to `floor'
+/tmp/ccSBV6sL.o: In function `main':
+/home/n/nils/cis520/CIS520P3/bochs-2.4.5/conftest.c:131: undefined reference to `floor'
 collect2: error: ld returned 1 exit status
 configure:28409: $? = 1
 configure: failed program was:
